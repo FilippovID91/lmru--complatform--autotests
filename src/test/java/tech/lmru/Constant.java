@@ -20,5 +20,5 @@ public class Constant {
     public final static String HISTORY_START_SEARCH_DATE = LocalDate.now() + "T00:00:00.000+03:00";
     public final static String HISTORY_END_SEARCH_DATE = LocalDate.now() + "T23:59:59.000+03:00";
 
-    public final static int SLEEPING_TIME = 1500;
+    public final static int SLEEPING_TIME = 2500;
 }
