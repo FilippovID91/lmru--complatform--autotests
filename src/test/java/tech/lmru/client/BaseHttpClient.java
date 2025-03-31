@@ -4,12 +4,24 @@ import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
+import java.util.Objects;
+
 import static io.restassured.RestAssured.given;
 
 public class BaseHttpClient {
+    static String environment_jenkins = "STAGE";
 
-    //public static String BASE_URI = "https://complatform-test-yc-customer-stage.apps.lmru.tech";//"http://localhost:8072/v1";
-    public static String BASE_URI = "https://complatform-yc-customer-stage.apps.lmru.tech";
+public static String environment(String environment) {
+    if (Objects.equals(environment, "STAGE")) {
+        BASE_URI = "https://complatform-yc-customer-stage.apps.lmru.tech";}
+    else if (Objects.equals(environment, "TEST")) {
+        BASE_URI = "https://complatform-test-yc-customer-stage.apps.lmru.tech";
+    }
+    else {System.out.println("Environment can be TEST or STAGE");};
+    return BASE_URI;
+}
+
+public static String BASE_URI = environment(environment_jenkins);
     public static String COMMUNICATION = "/communication/v1/communications"; //communications
     public static String COMMUNICATION_SEND = "/communication/v1/communications:send";
     public static String COMMUNICATION_TASK = "/communication-tasks";
