@@ -12,7 +12,9 @@ public class BaseHttpClient {
     //static String environment_jenkins = "STAGE";
 
 public static String environment() {
-    String environment_jenkins = System.getProperty("ENVIRONMENT_JENKINS");
+    //String environment_jenkins = System.getProperty("ENVIRONMENT_JENKINS");
+    String environment_jenkins = System.getenv("ENVIRONMENT_JENKINS");
+
     if (environment_jenkins.equals("STAGE")) {
         BASE_URI = "https://complatform-yc-customer-stage.apps.lmru.tech";}
     else if (environment_jenkins.equals("TEST")) {
