@@ -9,7 +9,8 @@ import java.util.Objects;
 import static io.restassured.RestAssured.given;
 
 public class BaseHttpClient {
-    static String environment_jenkins = "STAGE";
+    //static String environment_jenkins = "STAGE";
+    static String environment_jenkins = System.getProperty("ENVIRONMENT_JENKINS");
 
 public static String environment(String environment) {
     if (Objects.equals(environment, "STAGE")) {
