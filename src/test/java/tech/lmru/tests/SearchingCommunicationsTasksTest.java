@@ -4,12 +4,12 @@ import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.*;
+
 import java.sql.SQLException;
 
 import static java.lang.Thread.sleep;
 import static tech.lmru.Constant.*;
-import static tech.lmru.client.JdbcClient.*;
-import static tech.lmru.communications.CommunicationsCreate.*;
+import static tech.lmru.steps.StepsCommunicationCreate.*;
 import static tech.lmru.steps.StepsCommunication.*;
 import static tech.lmru.steps.StepsCommunicationHistory.*;
 import static tech.lmru.steps.StepsConsentManager.findClientNumberForContact;
@@ -25,16 +25,6 @@ public class SearchingCommunicationsTasksTest {
     private Response responseGenericSmsHistory;
     private Response responseCommunicationHistory;
 
-    @BeforeEach
-    public void setup() throws SQLException, ClassNotFoundException {
-        getConnectionDB();
-    }
-
-    @AfterEach
-    public void teardown() throws SQLException, ClassNotFoundException {
-        closeConnectionDB();
-    }
-
     @Test
     @Order(1)
     @AllureId("280606")
@@ -43,16 +33,16 @@ public class SearchingCommunicationsTasksTest {
     public void searchTaskWithStoreIdRuTest_1() throws InterruptedException, SQLException {
         String randomId = RandomStringUtils.randomNumeric(6);
         String allureId = "280606";
-        String contactPhone = "79049" + allureId;
+        String contactPhoneFake = "79049" + allureId;
         String communicationName = "autotestService";
 
         communicationAutotestServiceCheckOrCreate();
-        communicationEventId = communicationSend(communicationName, contactPhone, CONTACT_TYPE_PHONE,
+        communicationEventId = communicationSend(communicationName, contactPhoneFake, CONTACT_TYPE_PHONE,
                 allureId, randomId, "25");
         sleep(SLEEPING_TIME);
 
-        responseGenericSmsHistory = doGetGenericSmsHistory(contactPhone, GENERIC_SMS_START_SEARCH_DATE, GENERIC_SMS_END_SEARCH_DATE);
-        checkGenericSmsSending(responseGenericSmsHistory, "+" + contactPhone, "Complatform autotest: номер " + allureId + ", id " + randomId + ", storeId 25" + ", sms");
+        responseGenericSmsHistory = doGetGenericSmsHistory(contactPhoneFake, GENERIC_SMS_START_SEARCH_DATE, GENERIC_SMS_END_SEARCH_DATE);
+        checkGenericSmsSending(responseGenericSmsHistory, "+" + contactPhoneFake, "Complatform autotest: номер " + allureId + ", id " + randomId + ", storeId 25" + ", sms");
     }
 
     @Test
@@ -63,16 +53,16 @@ public class SearchingCommunicationsTasksTest {
     public void searchTaskWithStoreIdKzTest_2() throws InterruptedException, SQLException {
         String randomId = RandomStringUtils.randomNumeric(6);
         String allureId = "280628";
-        String contactPhone = "79049" + allureId;
+        String contactPhoneFake = "79049" + allureId;
         String communicationName = "autotestServiceKz";
 
         communicationAutotestServiceKzCheckOrCreate();
-        communicationEventId = communicationSend(communicationName, contactPhone, CONTACT_TYPE_PHONE,
+        communicationEventId = communicationSend(communicationName, contactPhoneFake, CONTACT_TYPE_PHONE,
                 allureId, randomId, "113");
         sleep(SLEEPING_TIME);
 
-        responseGenericSmsHistory = doGetGenericSmsHistory(contactPhone, GENERIC_SMS_START_SEARCH_DATE, GENERIC_SMS_END_SEARCH_DATE);
-        checkGenericSmsSending(responseGenericSmsHistory, "+" + contactPhone, "Complatform autotest: номер " + allureId + ", id " + randomId + ", storeId 113" + ", sms");
+        responseGenericSmsHistory = doGetGenericSmsHistory(contactPhoneFake, GENERIC_SMS_START_SEARCH_DATE, GENERIC_SMS_END_SEARCH_DATE);
+        checkGenericSmsSending(responseGenericSmsHistory, "+" + contactPhoneFake, "Complatform autotest: номер " + allureId + ", id " + randomId + ", storeId 113" + ", sms");
     }
 
     @Test
@@ -83,16 +73,16 @@ public class SearchingCommunicationsTasksTest {
     public void searchTaskWithOtherStoreIdTest_3() throws InterruptedException, SQLException {
         String randomId = RandomStringUtils.randomNumeric(6);
         String allureId = "280629";
-        String contactPhone = "79049" + allureId;
+        String contactPhoneFake = "79049" + allureId;
         String communicationName = "autotestService";
 
         communicationAutotestServiceCheckOrCreate();
-        communicationEventId = communicationSend(communicationName, contactPhone, CONTACT_TYPE_PHONE,
+        communicationEventId = communicationSend(communicationName, contactPhoneFake, CONTACT_TYPE_PHONE,
                 allureId, randomId, "50");
         sleep(SLEEPING_TIME);
 
-        responseGenericSmsHistory = doGetGenericSmsHistory(contactPhone, GENERIC_SMS_START_SEARCH_DATE, GENERIC_SMS_END_SEARCH_DATE);
-        checkGenericSmsSending(responseGenericSmsHistory, "+" + contactPhone, "Complatform autotest: номер " + allureId + ", id " + randomId + ", sms");
+        responseGenericSmsHistory = doGetGenericSmsHistory(contactPhoneFake, GENERIC_SMS_START_SEARCH_DATE, GENERIC_SMS_END_SEARCH_DATE);
+        checkGenericSmsSending(responseGenericSmsHistory, "+" + contactPhoneFake, "Complatform autotest: номер " + allureId + ", id " + randomId + ", sms");
     }
 
     @Test
@@ -103,16 +93,16 @@ public class SearchingCommunicationsTasksTest {
     public void searchTaskForPhoneWithoutStoreIdTest_4() throws InterruptedException, SQLException {
         String randomId = RandomStringUtils.randomNumeric(6);
         String allureId = "280701";
-        String contactPhone = "79049" + allureId;
+        String contactPhoneFake = "79049" + allureId;
         String communicationName = "autotestService";
 
         communicationAutotestServiceCheckOrCreate();
-        communicationEventId = communicationSend(communicationName, contactPhone, CONTACT_TYPE_PHONE,
+        communicationEventId = communicationSend(communicationName, contactPhoneFake, CONTACT_TYPE_PHONE,
                 allureId, randomId, null);
         sleep(SLEEPING_TIME);
 
-        responseGenericSmsHistory = doGetGenericSmsHistory(contactPhone, GENERIC_SMS_START_SEARCH_DATE, GENERIC_SMS_END_SEARCH_DATE);
-        checkGenericSmsSending(responseGenericSmsHistory, "+" + contactPhone, "Complatform autotest: номер " + allureId + ", id " + randomId + ", sms");
+        responseGenericSmsHistory = doGetGenericSmsHistory(contactPhoneFake, GENERIC_SMS_START_SEARCH_DATE, GENERIC_SMS_END_SEARCH_DATE);
+        checkGenericSmsSending(responseGenericSmsHistory, "+" + contactPhoneFake, "Complatform autotest: номер " + allureId + ", id " + randomId + ", sms");
     }
 
     @Test
@@ -174,7 +164,7 @@ public class SearchingCommunicationsTasksTest {
 
         responseCommunicationHistory = postCommunicationHistory(communicationHistoryBody(communicationName, contactEmailReal, CHANNEL_NAME_EMAIL, HISTORY_START_SEARCH_DATE, HISTORY_END_SEARCH_DATE));
         checkCommunicationNotSent(responseCommunicationHistory, communicationEventId);
-        }
+    }
 
     @Test
     @Order(8)

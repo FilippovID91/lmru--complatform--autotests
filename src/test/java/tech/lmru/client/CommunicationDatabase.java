@@ -5,11 +5,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.swing.UIManager.getInt;
 import static tech.lmru.client.JdbcClient.statementDB;
 
 public class CommunicationDatabase {
-
 
     public static void getChannelId(String type) throws SQLException {
 

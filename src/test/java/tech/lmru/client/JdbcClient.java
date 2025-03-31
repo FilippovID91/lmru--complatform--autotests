@@ -2,17 +2,15 @@ package tech.lmru.client;
 
 import java.sql.*;
 
-public class JdbcClient {
-    static final String DATABASE_URL = "jdbc:postgresql://o-cmpl-pg-db-01.ru-central1.internal:5435/communication"; //preprod
-    static final String JDBC_DRIVER = "org.postgresql.Driver";
-    //static final String DATABASE_URL = "jdbc:postgresql://localhost:55432/communication";//local
-    //static final String DATABASE_URL = "jdbc:postgresql://t-cmpl-pg-db-01.ru-central1.internal:5435/communication"; //test
+import static tech.lmru.steps.StepsEnvironment.environmentVariable;
 
-    static final String USER = "communication_rw_user"; //test and preprod
-    static final String PASSWORD = "8wX5q6ewWy4HLc5g"; //preprod
-    //static final String USER = "communication"; //local
-    //static final String PASSWORD = "communication"; //local
-    //static final String PASSWORD = "B8exV5rgdKBbWPSU"; //test
+public class JdbcClient {
+
+    static final String DATABASE_URL = environmentVariable("jdbc:postgresql://t-cmpl-pg-db-01.ru-central1.internal:5435/communication",
+            "jdbc:postgresql://o-cmpl-pg-db-01.ru-central1.internal:5435/communication");
+    static final String JDBC_DRIVER = "org.postgresql.Driver";
+    static final String USER = "communication_rw_user";
+    static final String PASSWORD = environmentVariable("B8exV5rgdKBbWPSU", "8wX5q6ewWy4HLc5g");
 
     public static Statement statementDB;
     private static Connection connectionDB;
@@ -36,4 +34,5 @@ public class JdbcClient {
         if (connectionDB != null) {
             connectionDB.close();
         }
-    }}
+    }
+}

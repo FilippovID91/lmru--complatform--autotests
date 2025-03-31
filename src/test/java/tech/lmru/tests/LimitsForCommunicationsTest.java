@@ -10,9 +10,7 @@ import java.sql.SQLException;
 
 import static java.lang.Thread.sleep;
 import static tech.lmru.Constant.*;
-import static tech.lmru.client.JdbcClient.closeConnectionDB;
-import static tech.lmru.client.JdbcClient.getConnectionDB;
-import static tech.lmru.communications.CommunicationsCreate.communicationAutotestTriggerCheckOrCreate;
+import static tech.lmru.steps.StepsCommunicationCreate.communicationAutotestTriggerCheckOrCreate;
 import static tech.lmru.steps.StepsCommunication.communicationSend;
 import static tech.lmru.steps.StepsCommunicationHistory.*;
 import static tech.lmru.steps.StepsConsentManager.findClientNumberForContact;
@@ -31,16 +29,6 @@ public class LimitsForCommunicationsTest {
     private Response responseGenericSmsHistory;
     private Response responseCommunicationHistory;
     private Response responseEstimatorLimits;
-
-    @BeforeEach
-    public void setup() throws SQLException, ClassNotFoundException {
-        getConnectionDB();
-    }
-
-    @AfterEach
-    public void teardown() throws SQLException, ClassNotFoundException {
-        closeConnectionDB();
-    }
 
     @Test
     @Order(1)
@@ -181,34 +169,4 @@ public class LimitsForCommunicationsTest {
         checkCommunicationHistorySending(responseCommunicationHistory, communicationEventId, communicationName, CHANNEL_NAME_EMAIL, contactEmailReal);
         checkCommunicationHistoryQuarantineNotFound(responseCommunicationHistory, communicationEventId, contactPhoneReal);
     }
-/*
-    @Test
-    @Order(6)
-    @DisplayName("checkLimitSentCommunicationToAnotherContactTest_6")
-    @Description(value = "Проверка лимитов на отправку коммуникаций - отправка сообщения на второй контакт, при не пройденной проверке по первому")
-    public void checkLimitSentCommunicationToAnotherContactTest_6() throws InterruptedException, SQLException {
-        String randomId = RandomStringUtils.randomNumeric(6);
-        String allureId = "280726";
-        String contactClientNumber = "154146578";
-        String contactPhoneReal = contactPhone;
-        String contactEmailReal = contactEmail;
-        String communicationId = String.valueOf(StepsCommunication.getCommunicationId(StepsCommunication.getCommunication("autotestTrigger")));
-
-        CommunicationsCreate.communicationAutotestTriggerCheckOrCreate();
-        StepsCommunication.communicationSend("autotestTrigger", contactClientNumber, contactTypeClientNumber,
-                allureId, randomId, null);
-        sleep(1500);
-
-        responseEstimatorLimits = StepsEstimatorLimit.postEstimatorLimit(communicationId, contactPhoneReal, channelNameSms);
-        StepsEstimatorLimit.checkEstimatorLimit(responseEstimatorLimits, false);
-
-        communicationEventId = StepsCommunication.communicationSend("autotestTrigger", contactClientNumber, contactTypeClientNumber,
-                allureId, randomId, null);
-        sleep(1500);
-        System.out.println(communicationEventId);
-
-        setCommunicationHistoryBody(communicationHistoryBody,"autotestTrigger", contactEmailReal, channelNameEmail, historyStartSearchDate, historyEndSearchDate);
-        responseCommunicationHistory = StepsCommunicationHistory.postCommunicationHistory(communicationHistoryBody);
-        checkCommunicationSending(responseCommunicationHistory, communicationEventId, "autotestTrigger", channelNameEmail, contactEmailReal);
-    }*/
 }

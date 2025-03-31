@@ -15,5 +15,4 @@ public class CommunicationSendVariables {
         this.key = key;
         this.val = val;
     }
-
 }

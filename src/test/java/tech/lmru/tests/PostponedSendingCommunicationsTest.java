@@ -16,7 +16,7 @@ import static tech.lmru.Constant.*;
 import static tech.lmru.client.CommunicationDatabase.getPostponedCommunicationTask;
 import static tech.lmru.client.JdbcClient.closeConnectionDB;
 import static tech.lmru.client.JdbcClient.getConnectionDB;
-import static tech.lmru.communications.CommunicationsCreate.*;
+import static tech.lmru.steps.StepsCommunicationCreate.*;
 import static tech.lmru.steps.StepsCommunication.communicationSend;
 import static tech.lmru.steps.StepsCommunicationHistory.*;
 import static tech.lmru.steps.StepsGenericSmsHistory.*;

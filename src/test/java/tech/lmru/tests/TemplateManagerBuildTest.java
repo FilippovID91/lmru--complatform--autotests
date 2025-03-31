@@ -4,15 +4,14 @@ import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.*;
-import tech.lmru.communications.CommunicationsCreate;
+import tech.lmru.steps.StepsCommunicationCreate;
 
 import java.sql.SQLException;
 
 import static java.lang.Thread.sleep;
 import static tech.lmru.Constant.*;
-import static tech.lmru.client.JdbcClient.*;
-import static tech.lmru.communications.CommunicationsCreate.communicationAutotestMarketingCheckOrCreate;
-import static tech.lmru.communications.CommunicationsCreate.communicationAutotestTriggerPostponedCheckOrCreate;
+import static tech.lmru.steps.StepsCommunicationCreate.communicationAutotestMarketingCheckOrCreate;
+import static tech.lmru.steps.StepsCommunicationCreate.communicationAutotestTriggerPostponedCheckOrCreate;
 import static tech.lmru.steps.StepsCommunication.communicationSend;
 import static tech.lmru.steps.StepsCommunicationHistory.*;
 import static tech.lmru.steps.StepsConsentManager.findClientNumberForContact;
@@ -28,16 +27,6 @@ public class TemplateManagerBuildTest {
     private Response responseGenericSmsHistory;
     private Response responseCommunicationHistory;
 
-    @BeforeEach
-    public void setup() throws SQLException, ClassNotFoundException {
-        getConnectionDB();
-    }
-
-    @AfterEach
-    public void teardown() throws SQLException, ClassNotFoundException {
-        closeConnectionDB();
-    }
-
     @Test
     @Order(1)
     @AllureId("281330")
@@ -49,7 +38,7 @@ public class TemplateManagerBuildTest {
         String contactPhoneFake = "79049" + allureId;
         String communicationName = "autotestServiceSmsEmail";
 
-        CommunicationsCreate.communicationAutotestServiceSmsEmailCheckOrCreate();
+        StepsCommunicationCreate.communicationAutotestServiceSmsEmailCheckOrCreate();
         communicationEventId = communicationSend(communicationName, contactPhoneFake, CONTACT_TYPE_PHONE,
                 allureId, randomId, null);
         sleep(SLEEPING_TIME);
@@ -70,7 +59,7 @@ public class TemplateManagerBuildTest {
         String communicationName = "autotestTrigger";
         String contactClientNumber = findClientNumberForContact(contactPush);
 
-        CommunicationsCreate.communicationAutotestTriggerCheckOrCreate();
+        StepsCommunicationCreate.communicationAutotestTriggerCheckOrCreate();
         communicationEventId = communicationSend(communicationName, contactClientNumber, CONTACT_TYPE_CLIENT_NUMBER,
                 allureId, randomId, null);
         sleep(SLEEPING_TIME);

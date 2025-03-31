@@ -30,5 +30,4 @@ public class CommunicationTask {
         this.toTime = toTime;
         this.attemptsCount = attemptsCount;
     }
-
 }

@@ -6,7 +6,6 @@ import tech.lmru.client.BaseHttpClient;
 import tech.lmru.pojo.CommunicationHistory;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.Matchers.containsInAnyOrder;
 
 public class StepsCommunicationHistory extends BaseHttpClient {
 

@@ -1,11 +1,10 @@
-package tech.lmru.communications;
+package tech.lmru.steps;
 
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import tech.lmru.client.CommunicationDatabase;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import static io.qameta.allure.Allure.step;
 import static tech.lmru.resources.AutotestMarketingTaskData.*;
@@ -22,18 +21,17 @@ import static tech.lmru.resources.TemplateData.*;
 import static tech.lmru.steps.StepsCommunication.*;
 import static tech.lmru.steps.StepsTemplateManager.*;
 
-
-public class CommunicationsCreate {
+public class StepsCommunicationCreate {
     static Response response;
 
     @Step("Проверка, что коммуникация 'autotestService' уже создана")
-    public static void communicationAutotestServiceCheckOrCreate() throws SQLException {
-        List<Integer> checkCommunicationId = CommunicationDatabase.getCommunicationId("autotestService");
+    public static void communicationAutotestServiceCheckOrCreate() {
+        Integer checkCommunicationId = getCommunicationId(getCommunication("autotestService"));
 
-        if (checkCommunicationId.isEmpty()) {
+        if (checkCommunicationId == null) {
             step("Создание коммуникации 'autotestService' с шаблонами и тасками");
             communicationCreate("autotestService", "SERVICE", 9, 2);
-            Integer communicationId = (CommunicationDatabase.getCommunicationId("autotestService")).get(0);
+            Integer communicationId = getCommunicationId(getCommunication("autotestService"));
 
             communicationTaskCreate(communicationId, getOrCreateTemplateId(pushTemplate), autotestServiceTaskPush1);
             communicationTaskCreate(communicationId, getOrCreateTemplateId(pushTemplateWithStoreId), autotestServiceTaskPush2);
@@ -44,13 +42,13 @@ public class CommunicationsCreate {
     }
 
     @Step("Проверка, что коммуникация 'autotestServiceKz' уже создана")
-    public static void communicationAutotestServiceKzCheckOrCreate() throws SQLException {
-        List<Integer> checkCommunicationId = CommunicationDatabase.getCommunicationId("autotestServiceKz");
+    public static void communicationAutotestServiceKzCheckOrCreate() {
+        Integer checkCommunicationId = getCommunicationId(getCommunication("autotestServiceKz"));
 
-        if (checkCommunicationId.isEmpty()) {
+        if (checkCommunicationId == null) {
             step("Создание коммуникации 'autotestServiceKz' с шаблонами и тасками");
             communicationCreate("autotestServiceKz", "SERVICE", 40, 2);
-            Integer communicationId = (CommunicationDatabase.getCommunicationId("autotestServiceKz")).get(0);
+            Integer communicationId = getCommunicationId(getCommunication("autotestServiceKz"));
 
             communicationTaskCreate(communicationId, getOrCreateTemplateId(smsTemplate), autotestServiceKzTaskSms1);
             communicationTaskCreate(communicationId, getOrCreateTemplateId(smsTemplateWithStoreId), autotestServiceKzTaskSms2);
@@ -58,26 +56,26 @@ public class CommunicationsCreate {
     }
 
     @Step("Проверка, что коммуникация 'autotestServiceEmail' уже создана")
-    public static void communicationAutotestServiceEmailCheckOrCreate() throws SQLException {
-        List<Integer> checkCommunicationId = CommunicationDatabase.getCommunicationId("autotestServiceEmail");
+    public static void communicationAutotestServiceEmailCheckOrCreate() {
+        Integer checkCommunicationId = getCommunicationId(getCommunication("autotestServiceEmail"));
 
-        if (checkCommunicationId.isEmpty()) {
+        if (checkCommunicationId == null) {
             step("Создание коммуникации 'autotestServiceEmail' с шаблонами и тасками");
             communicationCreate("autotestServiceEmail", "SERVICE", 9, 2);
-            Integer communicationId = (CommunicationDatabase.getCommunicationId("autotestServiceEmail")).get(0);
+            Integer communicationId = getCommunicationId(getCommunication("autotestServiceEmail"));
 
             communicationTaskCreate(communicationId, getServiceTemplateIdFromPmp(), autotestServiceEmailTaskEmail);
         }
     }
 
     @Step("Проверка, что коммуникация 'autotestServiceSmsEmail' уже создана")
-    public static void communicationAutotestServiceSmsEmailCheckOrCreate() throws SQLException {
-        List<Integer> checkCommunicationId = CommunicationDatabase.getCommunicationId("autotestServiceSmsEmail");
+    public static void communicationAutotestServiceSmsEmailCheckOrCreate() {
+        Integer checkCommunicationId = getCommunicationId(getCommunication("autotestServiceSmsEmail"));
 
-        if (checkCommunicationId.isEmpty()) {
+        if (checkCommunicationId == null) {
             step("Создание коммуникации 'autotestServiceSmsEmail' с шаблонами и тасками");
             communicationCreate("autotestServiceSmsEmail", "SERVICE", 9, 2);
-            Integer communicationId = (CommunicationDatabase.getCommunicationId("autotestServiceSmsEmail")).get(0);
+            Integer communicationId = getCommunicationId(getCommunication("autotestServiceSmsEmail"));
 
             communicationTaskCreate(communicationId, getOrCreateTemplateId(smsTemplate), autotestServiceSmsEmailTaskSms);
             communicationTaskCreate(communicationId, getServiceTemplateIdFromPmp(), autotestServiceSmsEmailTaskEmail);
@@ -85,13 +83,13 @@ public class CommunicationsCreate {
     }
 
     @Step("Проверка, что коммуникация 'autotestServicePostponed' уже создана")
-    public static void communicationAutotestServicePostponedCheckOrCreate() throws SQLException {
-        List<Integer> checkCommunicationId = CommunicationDatabase.getCommunicationId("autotestServicePostponed");
+    public static void communicationAutotestServicePostponedCheckOrCreate() {
+        Integer checkCommunicationId = getCommunicationId(getCommunication("autotestServicePostponed"));
 
-        if (checkCommunicationId.isEmpty()) {
+        if (checkCommunicationId == null) {
             step("Создание коммуникации 'autotestServicePostponed' с шаблонами и тасками");
             communicationCreate("autotestServicePostponed", "SERVICE", 9, 2);
-            Integer communicationId = (CommunicationDatabase.getCommunicationId("autotestServicePostponed")).get(0);
+            Integer communicationId = getCommunicationId(getCommunication("autotestServicePostponed"));
 
             communicationTaskCreate(communicationId, getOrCreateTemplateId(smsTemplate), autotestServicePostponedTaskSms1);
             communicationTaskCreate(communicationId, getOrCreateTemplateId(smsTemplate), autotestServicePostponedTaskSms2);
@@ -100,13 +98,13 @@ public class CommunicationsCreate {
     }
 
     @Step("Проверка, что коммуникация 'autotestTrigger' уже создана")
-    public static void communicationAutotestTriggerCheckOrCreate() throws SQLException {
-        List<Integer> checkCommunicationId = CommunicationDatabase.getCommunicationId("autotestTrigger");
+    public static void communicationAutotestTriggerCheckOrCreate() {
+        Integer checkCommunicationId = getCommunicationId(getCommunication("autotestTrigger"));
 
-        if (checkCommunicationId.isEmpty()) {
+        if (checkCommunicationId == null) {
             step("Создание коммуникации 'autotestTrigger' с шаблонами и тасками");
             communicationCreate("autotestTrigger", "TRIGGER", 9, 3);
-            Integer communicationId = (CommunicationDatabase.getCommunicationId("autotestTrigger")).get(0);
+            Integer communicationId = getCommunicationId(getCommunication("autotestTrigger"));
 
             communicationTaskCreate(communicationId, getOrCreateTemplateId(pushTemplate), autotestTriggerTaskPush);
             communicationTaskCreate(communicationId, getOrCreateTemplateId(smsTemplate), autotestTriggerTaskSms);
@@ -115,13 +113,13 @@ public class CommunicationsCreate {
     }
 
     @Step("Проверка, что коммуникация 'autotestTriggerEmail' уже создана")
-    public static void communicationAutotestTriggerEmailCheckOrCreate() throws SQLException {
-        List<Integer> checkCommunicationId = CommunicationDatabase.getCommunicationId("autotestTriggerEmail");
+    public static void communicationAutotestTriggerEmailCheckOrCreate() {
+        Integer checkCommunicationId = getCommunicationId(getCommunication("autotestTriggerEmail"));
 
-        if (checkCommunicationId.isEmpty()) {
+        if (checkCommunicationId == null) {
             step("Создание коммуникации 'autotestTriggerEmail' с шаблонами и тасками");
             communicationCreate("autotestTriggerEmail", "TRIGGER", 9, 3);
-            Integer communicationId = (CommunicationDatabase.getCommunicationId("autotestTriggerEmail")).get(0);
+            Integer communicationId = getCommunicationId(getCommunication("autotestTriggerEmail"));
 
             communicationTaskCreate(communicationId, getTriggerTemplateIdFromPmp(), autotestTriggerEmailTaskEmail);
         }
@@ -129,9 +127,9 @@ public class CommunicationsCreate {
 
     @Step("Проверка, что коммуникация 'autotestTriggerSmsEmail' уже создана")
     public static void communicationAutotestTriggerSmsEmailCheckOrCreate() throws SQLException {
-        List<Integer> checkCommunicationId = CommunicationDatabase.getCommunicationId("autotestTriggerSmsEmail");
+        Integer checkCommunicationId = getCommunicationId(getCommunication("autotestTriggerSmsEmail"));
 
-        if (checkCommunicationId.isEmpty()) {
+        if (checkCommunicationId == null) {
             step("Создание коммуникации 'autotestTriggerSmsEmail' с шаблонами и тасками");
             communicationCreate("autotestTriggerSmsEmail", "TRIGGER", 9, 3);
             Integer communicationId = (CommunicationDatabase.getCommunicationId("autotestTriggerSmsEmail")).get(0);
@@ -143,9 +141,9 @@ public class CommunicationsCreate {
 
     @Step("Проверка, что коммуникация 'autotestTriggerPostponed' уже создана")
     public static void communicationAutotestTriggerPostponedCheckOrCreate() throws SQLException {
-        List<Integer> checkCommunicationId = CommunicationDatabase.getCommunicationId("autotestTriggerPostponed");
+        Integer checkCommunicationId = getCommunicationId(getCommunication("autotestTriggerPostponed"));
 
-        if (checkCommunicationId.isEmpty()) {
+        if (checkCommunicationId == null) {
             step("Создание коммуникации 'autotestTriggerPostponed' с шаблонами и тасками");
             communicationCreate("autotestTriggerPostponed", "TRIGGER", 9, 3);
             Integer communicationId = (CommunicationDatabase.getCommunicationId("autotestTriggerPostponed")).get(0);
@@ -158,9 +156,9 @@ public class CommunicationsCreate {
 
     @Step("Проверка, что коммуникация 'autotestMarketing' уже создана")
     public static void communicationAutotestMarketingCheckOrCreate() throws SQLException {
-        List<Integer> checkCommunicationId = CommunicationDatabase.getCommunicationId("autotestMarketing");
+        Integer checkCommunicationId = getCommunicationId(getCommunication("autotestMarketing"));
 
-        if (checkCommunicationId.isEmpty()) {
+        if (checkCommunicationId == null) {
             step("Создание коммуникации 'autotestMarketing' с шаблонами и тасками");
             communicationCreate("autotestMarketing", "MARKETING", 9, 3);
             Integer communicationId = (CommunicationDatabase.getCommunicationId("autotestMarketing")).get(0);

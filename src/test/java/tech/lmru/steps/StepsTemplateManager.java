@@ -5,11 +5,7 @@ import io.restassured.response.Response;
 import tech.lmru.client.BaseHttpClient;
 import tech.lmru.pojo.CommunicationTemplate;
 
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.CoreMatchers.hasItems;
-
 public class StepsTemplateManager extends BaseHttpClient {
-
 
     // POST /templates
     @Step("Создание нового шаблона коммуникации в Template manager")

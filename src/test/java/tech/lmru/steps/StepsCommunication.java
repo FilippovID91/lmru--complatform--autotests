@@ -50,7 +50,7 @@ public class StepsCommunication extends BaseHttpClient {
             variables.add(communicationVariables3);
         }
 
-        CommunicationSend communicationSend  = new CommunicationSend(
+        CommunicationSend communicationSend = new CommunicationSend(
                 communicationName,
                 contacts,
                 variables,
@@ -63,7 +63,7 @@ public class StepsCommunication extends BaseHttpClient {
     // POST /communications:send
     @Step("Отправка коммуникации '{communicationName}' на контакты '{contact1}', '{contact2}' и получение 'communicationEventId'")
     public static String communicationWithTwoContactSend(String communicationName, String contact1, String contactType1, String contact2, String contactType2,
-                                           String autotestNumber, String autotestId, String storeId) {
+                                                         String autotestNumber, String autotestId, String storeId) {
 
         CommunicationSendContact communicationContact1 = new CommunicationSendContact(contact1, contactType1);
         CommunicationSendContact communicationContact2 = new CommunicationSendContact(contact2, contactType2);
@@ -87,7 +87,7 @@ public class StepsCommunication extends BaseHttpClient {
             variables.add(communicationVariables3);
         }
 
-        CommunicationSend communicationSend  = new CommunicationSend(
+        CommunicationSend communicationSend = new CommunicationSend(
                 communicationName,
                 contacts,
                 variables,
@@ -103,9 +103,8 @@ public class StepsCommunication extends BaseHttpClient {
                 .then().log().all()
                 .statusCode(200)
                 .and()
-                .body("errors.details" , equalTo("Attribute 'communicationName' must not be null"));
+                .body("errors.details", equalTo("Attribute 'communicationName' must not be null"));
     }
-
 
     // GET /communications
     @Step("Запрос информации по коммуникации")
@@ -120,17 +119,4 @@ public class StepsCommunication extends BaseHttpClient {
                 .body()
                 .jsonPath().get("id[0]");
     }
-/*
-    @Step("Получение ID коммуникации. Если коммуникация не найдена, то создание новой коммуникации")
-    public static Integer checkOrCreateCommunication(String communicationName, String communicationType, int buId, int communicationPriority) {
-        Response response = getCommunication(communicationName);
-        Integer communicationId = getCommunicationId(response);
-        if (communicationId == null) {
-            communicationCreate(communicationName, communicationType, buId, communicationPriority);
-        }
-        Response responseNew = getCommunication(communicationName);
-        communicationId = getCommunicationId(responseNew);
-        return communicationId;
-    }*/
-
 }

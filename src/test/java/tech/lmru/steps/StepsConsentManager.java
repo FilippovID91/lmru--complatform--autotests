@@ -10,7 +10,7 @@ public class StepsConsentManager extends BaseHttpClient {
     // GET /communication-consent-manager/v1/{{contactId}}/customers
     @Step("Запрос в communication-consent-manager-v1 информации по contactId")
     public static Response getConsentManagerV2(String contactId) {
-        return doGetRequest(CONSENT_MANAGER_V1  + "/" + contactId + "/customers");
+        return doGetRequest(CONSENT_MANAGER_V1 + "/" + contactId + "/customers");
     }
 
     // POST /communication-consent-manager/v3/contacts:search

@@ -9,15 +9,14 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <allure.version>2.25.0</allure.version>
         <java.version>16</java.version>
+        <allure.version>2.25.0</allure.version>
         <lombok.version>1.18.36</lombok.version>
         <aspectj.version>1.9.22.1</aspectj.version>
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
-        <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -29,18 +28,16 @@
             <type>pom</type>
         </dependency>
 
-        <!-- модуль взаимодействия Allure и RestAssured -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-rest-assured</artifactId>
             <version>${allure.version}</version>
         </dependency>
 
-        <!-- модуль взаимодействия Allure и Junit -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
-            <version>2.29.0</version>
+            <version>${allure.version}</version>
         </dependency>
 
         <dependency>
@@ -49,40 +46,34 @@
             <version>2.24.3</version>
         </dependency>
 
-        <!--Spring vault-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>6.2.1</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>6.2.1</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
             <version>6.2.1</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.vault</groupId>
             <artifactId>spring-vault-core</artifactId>
             <version>2.3.2</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>5.3.20</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -95,7 +86,6 @@
             <groupId>org.awaitility</groupId>
             <artifactId>awaitility</artifactId>
             <version>3.0.0</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -114,7 +104,6 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.12.0</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -127,7 +116,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 

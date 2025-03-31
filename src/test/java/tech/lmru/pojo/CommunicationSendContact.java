@@ -15,5 +15,4 @@ public class CommunicationSendContact {
         this.contact = contact;
         this.type = type;
     }
-
 }

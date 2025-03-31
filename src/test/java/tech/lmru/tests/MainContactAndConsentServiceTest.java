@@ -4,26 +4,21 @@ import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.*;
-import tech.lmru.steps.StepsCommunication;
 
 import java.sql.SQLException;
 
 import static java.lang.Thread.sleep;
 import static tech.lmru.Constant.*;
-import static tech.lmru.client.JdbcClient.closeConnectionDB;
-import static tech.lmru.client.JdbcClient.getConnectionDB;
-import static tech.lmru.communications.CommunicationsCreate.*;
+import static tech.lmru.steps.StepsCommunicationCreate.*;
 import static tech.lmru.steps.StepsCommunication.communicationSend;
 import static tech.lmru.steps.StepsCommunication.communicationWithTwoContactSend;
 import static tech.lmru.steps.StepsCommunicationHistory.*;
 import static tech.lmru.steps.StepsConsentManager.*;
-import static tech.lmru.steps.StepsEstimatorLimit.checkEstimatorLimit;
-import static tech.lmru.steps.StepsEstimatorLimit.postEstimatorLimit;
 import static tech.lmru.steps.StepsGenericSmsHistory.*;
 
 @Epic("Complatform autotest")
 @Feature("Complatform autotest")
-@Story("Отложенная отправка коммуникаций")
+@Story("Логика поиска главного контакта и проверка согласий")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
 public class MainContactAndConsentServiceTest {
@@ -33,16 +28,6 @@ public class MainContactAndConsentServiceTest {
     private Response responseGenericSmsHistory2;
     private Response responseCommunicationHistory1;
     private Response responseCommunicationHistory2;
-
-    @BeforeEach
-    public void setup() throws SQLException, ClassNotFoundException {
-        getConnectionDB();
-    }
-
-    @AfterEach
-    public void teardown() throws SQLException, ClassNotFoundException {
-        closeConnectionDB();
-    }
 
     @Test
     @Order(1)
