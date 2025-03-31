@@ -154,16 +154,16 @@ public class LimitsForCommunicationsTest {
 
         communicationAutotestTriggerCheckOrCreate();
         communicationSend(communicationName, contactClientNumber, CONTACT_TYPE_CLIENT_NUMBER,
-                allureId, randomId, null);
+                allureId + "v1", randomId, null);
         sleep(SLEEPING_TIME);
 
         responseEstimatorLimits = postEstimatorLimit(communicationId, contactPhoneReal, CHANNEL_NAME_SMS);
         checkEstimatorLimit(responseEstimatorLimits, false);
-        sleep(SLEEPING_TIME + SLEEPING_TIME);
+        sleep(SLEEPING_TIME);
 
         communicationEventId = communicationSend(communicationName, contactClientNumber, CONTACT_TYPE_CLIENT_NUMBER,
-                allureId, randomId, null);
-        sleep(SLEEPING_TIME + SLEEPING_TIME);
+                allureId, randomId + "v2", null);
+        sleep(SLEEPING_TIME);
 
         responseCommunicationHistory = postCommunicationHistory(communicationHistoryBody(communicationName, contactEmailReal, CHANNEL_NAME_EMAIL, HISTORY_START_SEARCH_DATE, HISTORY_END_SEARCH_DATE));
         checkCommunicationHistorySending(responseCommunicationHistory, communicationEventId, communicationName, CHANNEL_NAME_EMAIL, contactEmailReal);
