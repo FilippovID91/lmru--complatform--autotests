@@ -100,7 +100,7 @@ public class TemplateManagerBuildTest {
 
         communicationAutotestMarketingCheckOrCreate();
         communicationEventId = communicationSend(communicationName, contactClientNumber, CONTACT_TYPE_CLIENT_NUMBER,
-                null, randomId, null);
+                null, randomId, "25");
         sleep(SLEEPING_TIME);
 
         responseCommunicationHistory = postCommunicationHistory(communicationHistoryBody(communicationName, CONTACT_EMAIL_REAL, CHANNEL_NAME_EMAIL, HISTORY_START_SEARCH_DATE, HISTORY_END_SEARCH_DATE));
